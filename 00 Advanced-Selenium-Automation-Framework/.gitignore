@@ -1,0 +1,7 @@
+/target/
+.metadata
+.project
+.classpath
+/.settings/
+/test-output/
+Readme.txt
