@@ -1,0 +1,11 @@
+# Base image with Maven and Java
+FROM maven:3.9.4-eclipse-temurin-17
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy all files to container
+COPY . /app
+
+# Run Maven tests
+CMD ["mvn", "clean", "test"]

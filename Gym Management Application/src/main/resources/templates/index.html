@@ -1,0 +1,13 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Batches</title></head>
+<body>
+<h1>Batches</h1>
+<a href="/batch/new">Create New Batch</a>
+<ul>
+  <li th:each="b : ${batches}">
+    <a th:href="@{|/batch/${b.id}|}" th:text="${b.name} + ' (' + b.timing + ')'"></a>
+  </li>
+</ul>
+</body>
+</html>

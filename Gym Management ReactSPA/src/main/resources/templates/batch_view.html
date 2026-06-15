@@ -1,0 +1,26 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title th:text="${batch.name}">Batch</title></head>
+<body>
+<h2 th:text="${batch.name} + ' (' + batch.timing + ')'"></h2>
+
+<h3>Participants</h3>
+<ul>
+  <li th:each="p : ${batch.participants}" th:text="${p.name} + ' - ' + ${p.age} + ' - ' + ${p.contact}"></li>
+</ul>
+
+<h3>Add Participant</h3>
+<form th:action="@{|/batch/${batch.id}/participant|}" method="post">
+  Name: <input name="name"/><br/>
+  Age: <input name="age" type="number"/><br/>
+  Contact: <input name="contact"/><br/>
+  <button type="submit">Add</button>
+</form>
+
+<form th:action="@{|/batch/${batch.id}/start|}" method="post" style="margin-top:10px;">
+  <button type="submit">Start Batch</button>
+</form>
+
+<a href="/">Back</a>
+</body>
+</html>

@@ -1,0 +1,16 @@
+version: "3"
+services:
+  bdd-tests:
+    build: .
+    container_name: bdd_test_runner
+    volumes:
+      - .:/app
+    depends_on:
+      - chrome
+    environment:
+      - BROWSER=remote
+
+  chrome:
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"

@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<suite name="BDD Parallel Suite" parallel="tests" thread-count="2">
+  <test name="Login Test">
+    <classes>
+      <class name="com.bdd.runners.TestRunner"/>
+    </classes>
+  </test>
+</suite>

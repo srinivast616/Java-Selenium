@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="tests" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <listeners>
+    <listener class-name="com.sample.pagefactory.utils.TestListener"/>
+  </listeners>
+  <test thread-count="2" parallel="tests" name="Test Firefox(failed)">
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="com.sample.pagefactory.tests.LoginTest_Properties">
+        <methods>
+          <include name="setup"/>
+          <include name="Teardown"/>
+          <include name="tearDown"/>
+          <include name="launchURL"/>
+          <include name="testLogin"/>
+        </methods>
+      </class> <!-- com.sample.pagefactory.tests.LoginTest_Properties -->
+    </classes>
+  </test> <!-- Test Firefox(failed) -->
+  <test thread-count="2" parallel="tests" name="Test Chrome(failed)">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="com.sample.pagefactory.tests.LoginTest_Properties">
+        <methods>
+          <include name="setup"/>
+          <include name="Teardown"/>
+          <include name="tearDown"/>
+          <include name="launchURL"/>
+          <include name="testLogin"/>
+        </methods>
+      </class> <!-- com.sample.pagefactory.tests.LoginTest_Properties -->
+    </classes>
+  </test> <!-- Test Chrome(failed) -->
+</suite> <!-- Failed suite [Suite] -->

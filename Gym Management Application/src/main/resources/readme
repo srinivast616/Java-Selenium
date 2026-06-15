@@ -1,0 +1,83 @@
+It is a complete, runnable Java web solution that adds UI + DB on top of the OOP design.
+
+It is a Spring Boot project (Maven), using Spring Data JPA for DB (embedded H2 by default for easy testing)
+and Thymeleaf for a simple web UI.
+
+It uses OOP, 1→many Batch→Participant, and runtime polymorphism for notifications (so when a batch starts each participant 
+receives a message via an overridden method).
+
+
+Technologies used:
+
+Spring Boot web app (runable from IDE or command line)
+
+H2 database (easy to switch to MySQL/Postgres)
+
+Thymeleaf UI: create batches, add participants, list batches/participants, start a batch (shows notifications)
+
+JPA entities: Batch, Participant (with inheritance so overridden method works)
+
+Repositories, Services, Controllers
+
+Maven
+
+Java 17+ (works with 11 too if you prefer)
+
+Spring Boot (2.7.x / 3.x — pick whichever your setup supports)
+
+Dependencies: spring-boot-starter-web, spring-boot-starter-thymeleaf, spring-boot-starter-data-jpa, h2
+
+
+Important design notes
+
+Batch has List<Participant> — 1-to-many JPA mapping.
+
+Participant is a JPA entity with inheritance strategy SINGLE_TABLE.
+ZumbaParticipant extends Participant and overrides notifyBatchStart(String batchName) — this demonstrates runtime polymorphism: 
+when we iterate participants and call notifyBatchStart, Java dispatches to the subclass implementation.
+
+When a batch is “started” via the UI, the app calls batchService.startBatch(batchId) → triggers notifications 
+(for demo we’ll show messages in UI and persist Notification records).
+
+How this demonstrates runtime polymorphism
+Participant defines notifyBatchStart(String).
+
+ZumbaParticipant overrides it.
+
+At runtime when batchService.startBatch iterates List<Participant> and calls p.notifyBatchStart(...), the JVM dispatches to ZumbaParticipant.notifyBatchStart — that's method overriding and runtime polymorphism.
+
+Run instructions
+Put the sources into a Maven project (package com.example.zumba).
+
+Build & run:
+
+In Eclipse/IntelliJ: Run ZumbaApplication as Java application (Spring Boot).
+
+Or via command line:
+
+bash
+Copy
+Edit
+mvn spring-boot:run
+Open browser: http://localhost:8080/
+
+Use UI to create batches, add participants and click Start Batch.
+
+Notifications will be printed to the server console (and you can extend to show on UI or persist a Notification entity).
+
+H2 console (if needed): http://localhost:8080/h2-console
+
+JDBC URL: jdbc:h2:mem:zumba username sa, no password.
+
+Optional extensions:
+
+Persist Notification records (who was notified & timestamp) and display in UI.
+
+Email/SMS integration when batch starts (plug a NotificationSender bean).
+
+Authentication: Teacher/admin roles (teacher only manages assigned batches).
+
+REST API + React/Angular frontend instead of Thymeleaf.
+
+Switch to MySQL or Postgres for persistent production DB (I can provide config).
+
